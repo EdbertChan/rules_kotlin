@@ -101,12 +101,13 @@ def kt_android_local_test(
     related attributes are handled by the native `android_library` rule while the test attributes
     are picked out and handled by the `android_local_test` rule.
     """
-
+    _manifest = manifest
+    _manifest_values = manifest_values
     # TODO(556): replace with starlark
     # buildifier: disable=native-android
     native.android_local_test(
         name = name,
-        deps = kwargs.get("deps", []) + _kt_android_artifact(name = name, testonly = testonly, **kwargs),
+        deps = kwargs.get("deps", []) + _kt_android_artifact(name = name, testonly = testonly, manifest = _manifest, manifest_values = _manifest_values, **kwargs),
         jvm_flags = jvm_flags,
         test_class = test_class,
         visibility = visibility,
@@ -115,8 +116,8 @@ def kt_android_local_test(
         flaky = flaky,
         shard_count = shard_count,
         custom_package = kwargs.get("custom_package", default = None),
-        manifest = manifest,
-        manifest_values = manifest_values,
+        manifest = _manifest,
+        manifest_values = _manifest_values,
         tags = kwargs.get("tags", default = None),
         testonly = testonly,
     )
