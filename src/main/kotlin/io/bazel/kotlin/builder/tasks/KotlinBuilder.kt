@@ -270,7 +270,6 @@ class KotlinBuilder @Inject internal constructor(
       }
 
       with(root.inputsBuilder) {
-        addAllClasspath(argMap.mandatory(KotlinBuilderFlags.CLASSPATH))
         addAllDepsArtifacts(
           argMap.optional(KotlinBuilderFlags.DEPS_ARTIFACTS) ?: emptyList(),
         )
